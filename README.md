@@ -1,1 +1,1 @@
-# backupNetworkDevConf
+# 备份华为或思科网络设备，并发送邮件。

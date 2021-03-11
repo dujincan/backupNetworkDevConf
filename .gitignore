@@ -3,4 +3,4 @@ __pycache__/
 network_device_list.xlsx
 main_test.py
 *.cfg
-README.md
+.idea/workspace.xml

@@ -21,9 +21,10 @@ def backup_network_dev(**device):
     try:
         connect_dev = netmiko.ConnectHandler(**device)
         if device['device_type'] == 'huawei':
-            connect_dev.send_command('dis arp')
+            conf = connect_dev.send_command('dis cu')
         elif device['device_type'] == 'cisco_ios':
-            connect_dev.send_command('show arp')
+            connect_dev.enable()
+            conf = connect_dev.send_command('show run')
 
     except NetMikoAuthenticationException as err_msg:
         return str(err_msg)
@@ -33,13 +34,6 @@ def backup_network_dev(**device):
         return str(err_msg)
 
     else:
-        if device['device_type'] == 'huawei':
-            conf = connect_dev.send_command('dis cu')
-
-        elif device['device_type'] == 'cisco_ios':
-            connect_dev.enable()
-            conf = connect_dev.send_command('show run')
-
         now = datetime.now()
         backup_file = "dev_" + device['ip'] + "_" + str(now.year) + str(now.month) \
                       + str(now.day) + str(time.strftime("%H%M")) + ".cfg"

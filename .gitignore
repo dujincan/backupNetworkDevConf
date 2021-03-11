@@ -1,3 +1,5 @@
 venv/
 __pycache__/
 network_device_list.xlsx
+main_test.py
+*.cfg

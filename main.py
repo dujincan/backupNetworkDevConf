@@ -6,23 +6,21 @@
 # @File    : main.py
 # @Software: PyCharm
 
-from backup import backup_network_device
-from mailTo import mailto
+from mail_to_admin import mail_to_admin
+from backup_network_dev import batch_backup_network_dev
 
-# backup
-excel_file = 'xxxxxxx.xlsx'
-backup_dir = '/xxxxxxx/backup/'
-msg = backup_network_device(excel_file, backup_dir)
+mail_context = batch_backup_network_dev('xxxxxxx.xlsx')
+
+mail_conf = {'my_sender': 'xxxxx@xxxxxxxxx.com',
+             'my_pass': 'xxxxxxx',
+             'recipients': ["xxxxxxx", "xxxxxxx"],
+             'mail_context': mail_context,
+             'mail_subject': 'xxxxxxx',
+             'mail_server': "xxxxxxx",
+             'port': 465,
+             }
 
 
-# send mail
-my_sender = "xxxxxxx"
-my_pass = "xxxxxxx"
-recipients = ["xxxxxxx01", "xxxxxxx02"]
-mail_context = msg
-mail_subject = "xxxxxxx"
-mail_server = "xxxxxxx.com"
-port = 465
+mail_to_admin(**mail_conf)
 
-mailto(my_sender, my_pass, recipients,
-       mail_context, mail_subject, mail_server, port)
+
